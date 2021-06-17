@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">List_creater_APP</string>
+
+    <string-array name="weightUnit">
+        <item>kg</item>
+        <item>g</item>
+
+    </string-array>
+</resources>
