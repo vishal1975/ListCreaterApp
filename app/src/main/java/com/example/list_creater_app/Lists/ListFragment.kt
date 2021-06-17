@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -84,7 +85,9 @@ class ListFragment : Fragment() {
             }
 
             override fun onEdit(item: ItemList) {
-                TODO("Not yet implemented")
+
+
+                showBottomSheetDialogForUpdateList(item)
             }
 
             override fun onShare(id: Long) {
@@ -96,12 +99,34 @@ class ListFragment : Fragment() {
     }
 
 
+    // bottom sheet dialog to update the list
+    private fun showBottomSheetDialogForUpdateList(itemlist: ItemList) {
+        val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
+        bottomSheetDialog.setContentView(R.layout.add_list)
+        bottomSheetDialog.setCanceledOnTouchOutside(true)
+        val text=bottomSheetDialog.findViewById<EditText>(R.id.add_list_name)
+        text?.setText(itemlist.listName)
+        val update: Button? =bottomSheetDialog.findViewById(R.id.create)
+        update?.setText("Update")
+        update?.setOnClickListener{
+
+            val item=ItemList(listName = text?.text.toString(),listId = itemlist.listId)
+            viewModel.updateList(item)
+
+            bottomSheetDialog.cancel()
+        }
+
+        bottomSheetDialog.show()
+    }
+
+
     // bottomsheet dialog for adding list name
     private fun showBottomSheetDialogForAddListName() {
        val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
         bottomSheetDialog.setContentView(R.layout.add_list)
         bottomSheetDialog.setCanceledOnTouchOutside(true)
         val create: Button? =bottomSheetDialog.findViewById(R.id.create)
+        create?.setText("Create")
         create?.setOnClickListener{
             val text=bottomSheetDialog.findViewById<EditText>(R.id.add_list_name)
             val item=ItemList(listName = text?.text.toString())

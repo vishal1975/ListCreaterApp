@@ -56,5 +56,14 @@ init {
         }
     }
 
+    fun updateList(itemList: ItemList){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                datasource.updateList(itemList)
+            }
+            _itemList.value= getItemList()
+        }
+    }
+
 
 }

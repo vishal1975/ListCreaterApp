@@ -48,6 +48,9 @@ class ItemListAdapter(val viewModel: ListViewModel): ListAdapter<ItemList, ItemL
                 itemListAdapterClickHandle.onDelete(item.listId)
                 //showBottomSheetDialog(viewModel,item.listId)
             }
+            binding.edit.setOnClickListener(){
+                itemListAdapterClickHandle.onEdit(item)
+            }
 
             binding.executePendingBindings()
         }
