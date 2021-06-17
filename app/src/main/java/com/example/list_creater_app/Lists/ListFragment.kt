@@ -2,19 +2,13 @@ package com.example.list_creater_app.Lists
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.list_creater_app.Database.ItemList
 import com.example.list_creater_app.Database.ListDatabase
@@ -106,7 +100,7 @@ class ListFragment : Fragment() {
         bottomSheetDialog.setCanceledOnTouchOutside(true)
         val text=bottomSheetDialog.findViewById<EditText>(R.id.add_list_name)
         text?.setText(itemlist.listName)
-        val update: Button? =bottomSheetDialog.findViewById(R.id.create)
+        val update: Button? =bottomSheetDialog.findViewById(R.id.add)
         update?.setText("Update")
         update?.setOnClickListener{
 
@@ -125,7 +119,7 @@ class ListFragment : Fragment() {
        val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
         bottomSheetDialog.setContentView(R.layout.add_list)
         bottomSheetDialog.setCanceledOnTouchOutside(true)
-        val create: Button? =bottomSheetDialog.findViewById(R.id.create)
+        val create: Button? =bottomSheetDialog.findViewById(R.id.add)
         create?.setText("Create")
         create?.setOnClickListener{
             val text=bottomSheetDialog.findViewById<EditText>(R.id.add_list_name)

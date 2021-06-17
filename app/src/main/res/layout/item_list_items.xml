@@ -56,11 +56,12 @@
                         android:id="@+id/list_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
+                        android:fontFamily="@font/satisfyregular"
+                        android:textColor="@color/black"
                         android:padding="10dp"
                         android:text="People Name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+                         />
 
                     <TextView
                         android:id="@+id/count"
@@ -68,13 +69,14 @@
                         android:layout_height="wrap_content"
 
                         android:layout_marginTop="@dimen/spacing_medium"
-
+                        android:fontFamily="@font/satisfyregular"
+                        android:textColor="@color/black"
                         android:maxLines="2"
                         android:padding="10dp"
                         android:text="items1"
 
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/grey_40" />
+                         />
 
                 </LinearLayout>
 
@@ -93,8 +95,8 @@
 
                     <ImageView
                         android:id="@+id/delete"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_marginLeft="@dimen/spacing_large"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="@dimen/spacing_large"
@@ -103,8 +105,8 @@
 
                     <ImageView
                         android:id="@+id/edit"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_marginLeft="@dimen/spacing_large"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="@dimen/spacing_large"
@@ -113,8 +115,8 @@
 
                     <ImageView
                         android:id="@+id/share"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_marginLeft="@dimen/spacing_large"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="@dimen/spacing_large"
@@ -130,7 +132,7 @@
         </LinearLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="6dp"
             android:background="@color/grey_10" />
     </LinearLayout>
 </layout>

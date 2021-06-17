@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:minHeight="?attr/actionBarSize"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
 
 
@@ -28,68 +29,115 @@
                 android:layout_width="@dimen/spacing_medium"
                 android:layout_height="0dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
 
-                android:orientation="horizontal">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+
+
+                android:layout_height="match_parent">
+
 
                 <LinearLayout
                     android:id="@+id/click"
-                    android:layout_width="250dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-
                     android:orientation="vertical"
+
+                    android:paddingTop="@dimen/spacing_middle"
                     android:paddingBottom="@dimen/spacing_middle"
-                    android:paddingTop="@dimen/spacing_middle">
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/itemname"
+                        android:id="@+id/item_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/spacing_middle"
-                        android:layout_marginRight="@dimen/spacing_middle"
-                        android:text="People Name"
+                        android:fontFamily="@font/satisfyregular"
+                        android:textSize="25sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingLeft="5dp"
+                        android:text="Item Name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+                        />
 
+                    <TextView
+                        android:id="@+id/quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:fontFamily="@font/satisfyregular"
+                        android:textColor="@color/black"
+                           android:textSize="15sp"
+                        android:paddingTop="0dp"
+                        android:paddingRight="5dp"
+                        android:paddingLeft="5dp"
+                        android:text="Quantity"
+
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        />
+                    <TextView
+                        android:id="@+id/rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:fontFamily="@font/satisfyregular"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:paddingTop="0dp"
+                        android:paddingRight="5dp"
+                        android:paddingLeft="5dp"
+                        android:text="Rate"
+
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/linearLayout"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/click"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+
 
 
 
                     <ImageView
-                        android:id="@+id/delete"
+                        android:id="@+id/info"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginTop="5dp"
                         android:layout_marginRight="@dimen/spacing_large"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:src="@drawable/delete" />
-                    <ImageView
-                        android:id="@+id/edit"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:src="@drawable/pencil" />
+                        android:layout_marginBottom="5dp"
+                        android:src="@drawable/information" />
+
+
                 </LinearLayout>
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
 
         </LinearLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="6dp"
             android:background="@color/grey_10" />
     </LinearLayout>
 </layout>

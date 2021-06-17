@@ -2,6 +2,7 @@
     <string name="app_name">List_creater_APP</string>
 
     <string-array name="weightUnit">
+        <item>None</item>
         <item>kg</item>
         <item>g</item>
 

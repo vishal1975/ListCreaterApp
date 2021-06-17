@@ -58,19 +58,20 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="start|top"
+            android:maxLines="2"
             android:hint="Enter short Description about item"
             android:inputType="textMultiLine" />
 
 
         <Button
-            android:id="@+id/create"
-            android:layout_width="90dp"
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_gravity="center"
-            android:text="create"
+            android:text="ADD"
             />
 
     </LinearLayout>

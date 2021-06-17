@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.list_creater_app.Database.ItemList
-import com.example.list_creater_app.Items.ItemAdapter.ViewHolder.Companion.from
+
 
 import com.example.list_creater_app.R
 import com.example.list_creater_app.databinding.ItemListItemsBinding

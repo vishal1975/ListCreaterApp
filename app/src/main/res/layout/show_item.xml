@@ -35,8 +35,8 @@
 
                 <ImageView
                     android:id="@+id/edit"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/pencil"
                     app:layout_constraintRight_toLeftOf="@+id/delete" />
@@ -44,19 +44,20 @@
                 <ImageView
                     android:id="@+id/delete"
 
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/delete"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:layout_editor_absoluteY="0dp" />
+                    tools:layout_editor_absoluteY="0dp"
+                    android:layout_marginStart="20dp" />
 
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <view
+        <View
             android:layout_width="match_parent"
-            android:layout_height="8dp"
+            android:layout_height="5dp"
             android:background="@color/black"/>
 <!--        layout for item name-->
         <LinearLayout
@@ -66,6 +67,7 @@
             android:layout_margin="20dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/itemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ITEM NAME"
@@ -173,6 +175,24 @@
                     tools:layout_editor_absoluteY="0dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="description"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:fontFamily="@font/satisfyregular"
+                android:textColor="@color/black"
+                android:textSize="25sp"/>
         </LinearLayout>
     </LinearLayout>
 

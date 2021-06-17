@@ -17,7 +17,7 @@ data class Item(
     val list_id:Long=0L,
     val itemName:String="",
     val quantity:Float=0F,
-    val quantityUnit:String="kg",
+    val quantityUnit:String="",
     val amount:Float=0F,
     val itemDescription:String=""
 )
