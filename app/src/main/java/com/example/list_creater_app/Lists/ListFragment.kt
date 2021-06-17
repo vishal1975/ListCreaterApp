@@ -83,7 +83,7 @@ class ListFragment : Fragment() {
                 showBottomSheetDialogForDeleteList(id)
             }
 
-            override fun onEdit(id: Long) {
+            override fun onEdit(item: ItemList) {
                 TODO("Not yet implemented")
             }
 

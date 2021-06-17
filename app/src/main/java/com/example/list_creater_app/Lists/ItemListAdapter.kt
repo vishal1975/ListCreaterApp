@@ -77,6 +77,6 @@ class ItemListDiffCallback : DiffUtil.ItemCallback<ItemList>() {
 interface ItemListAdapterClickHandle{
     fun layoutClick(id:Long)
     fun onDelete(id:Long)
-    fun onEdit(id:Long)
+    fun onEdit(item: ItemList)
     fun onShare(id:Long)
 }
