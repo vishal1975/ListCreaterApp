@@ -150,11 +150,13 @@ private fun showBottomSheetDialogToAddOrEditItemInList(id:Long,flag:Int=0,item:I
     // spinner
     val spinner=bottomSheetDialog.findViewById<Spinner>(R.id.weightspinner)
     val adapter=ArrayAdapter.createFromResource(requireContext(),
-            R.array.weightUnit, android.R.layout.simple_spinner_item)
+            R.array.weightUnit, R.layout.spinner_item)
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     spinner?.adapter=adapter
+
     // unit of item
     var unit=spinner?.selectedItem.toString()
+
     // checking whether we have to edit or add
     if(flag==1 && item!=null){
         add?.setText("Update")

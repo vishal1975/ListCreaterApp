@@ -1,13 +1,17 @@
 package com.example.list_creater_app.Lists
 
-import androidx.lifecycle.ViewModelProvider
+import android.content.DialogInterface
+import android.content.DialogInterface.OnMultiChoiceClickListener
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.list_creater_app.Database.ItemList
@@ -25,16 +29,16 @@ class ListFragment : Fragment() {
     private lateinit var viewModel: ListViewModel
     private lateinit var adapter: ItemListAdapter
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        binding= ListFragmentBinding.inflate(inflater,container,false)
+        binding= ListFragmentBinding.inflate(inflater, container, false)
        // binding= DataBindingUtil.inflate(inflater,R.layout.list_fragment,container,false)
         val application = requireNotNull(this.activity).application
         val datasource=ListDatabase.getInstance(application).sleepDatabaseDao
         // setting the viewModel and viewModelFactory
         val listViewmodelFactory=ListViewmodelFactory(datasource)
-         viewModel = ViewModelProvider(this,listViewmodelFactory).get(ListViewModel::class.java)
+         viewModel = ViewModelProvider(this, listViewmodelFactory).get(ListViewModel::class.java)
 
 
 
@@ -69,7 +73,7 @@ class ListFragment : Fragment() {
     }
 
     private fun setListRecyclerViewItemClickHandler() {
-        adapter.seTItemListAdapterClickHandle(object :ItemListAdapterClickHandle{
+        adapter.seTItemListAdapterClickHandle(object : ItemListAdapterClickHandle {
             override fun layoutClick(id: Long) {
                 findNavController().navigate(ListFragmentDirections.actionListFragmentToItemFragment().setId(id))
             }
@@ -85,13 +89,41 @@ class ListFragment : Fragment() {
             }
 
             override fun onShare(id: Long) {
-                TODO("Not yet implemented")
+                share()
             }
 
 
         })
     }
 
+
+
+    // Alert Dialog for share
+    fun share(){
+        val items= arrayOf("ItemName", "Quantity", "Rate", "Description", "Total Quantity", "Total Amount")
+        val checkedItems= booleanArrayOf(true, false, false, false, false, false)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Select the Item you want to Share")
+        builder.setMultiChoiceItems(items, checkedItems, OnMultiChoiceClickListener
+        { dialogInterface, i, b ->
+            checkedItems[i] = b
+        })
+        builder.setPositiveButton("OK", DialogInterface.OnClickListener
+        { dialogInterface, i ->
+
+            val s = StringBuilder()
+            for (i in 0..checkedItems.size - 1) {
+                if (checkedItems[i]) {
+                    s.append(items[i])
+                    s.append(" ")
+                }
+            }
+            Toast.makeText(requireContext(), s.toString(), Toast.LENGTH_LONG).show()
+
+        })
+        builder.setNegativeButton("CANCEL", null)
+        builder.show()
+    }
 
     // bottom sheet dialog to update the list
     private fun showBottomSheetDialogForUpdateList(itemlist: ItemList) {
@@ -104,7 +136,7 @@ class ListFragment : Fragment() {
         update?.setText("Update")
         update?.setOnClickListener{
 
-            val item=ItemList(listName = text?.text.toString(),listId = itemlist.listId)
+            val item=ItemList(listName = text?.text.toString(), listId = itemlist.listId)
             viewModel.updateList(item)
 
             bottomSheetDialog.cancel()
@@ -135,7 +167,7 @@ class ListFragment : Fragment() {
 
     // bottomsheet dialog for deleting the list from the database
 
-    private fun showBottomSheetDialogForDeleteList(id:Long) {
+    private fun showBottomSheetDialogForDeleteList(id: Long) {
         val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(binding.root.context, R.style.DialogStyle)
         bottomSheetDialog.setContentView(R.layout.bottomdialogfordelete)
         bottomSheetDialog.setCanceledOnTouchOutside(true)
