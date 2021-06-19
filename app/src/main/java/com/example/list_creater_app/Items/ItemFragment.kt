@@ -99,7 +99,8 @@ private fun showBottomSheetDialogToShowItemInList(item: Item){
     }
     // setting the clicklistner for delete
     delete?.setOnClickListener(){
-
+        showBottomSheetDialogToDeleteItem(item.itemId)
+        bottomSheetDialog.cancel()
     }
 
 
@@ -114,9 +115,22 @@ private fun showBottomSheetDialogToShowItemInList(item: Item){
 
 }
 
-// bottom sheet dialog to edit item list
+// bottom sheet dialog to Delete item list
 
+ fun showBottomSheetDialogToDeleteItem(id: Long){
+     val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(binding.root.context, R.style.DialogStyle)
+     bottomSheetDialog.setContentView(R.layout.bottomdialogfordelete)
+     bottomSheetDialog.setCanceledOnTouchOutside(true)
+     val ok: Button? =bottomSheetDialog.findViewById(R.id.ok)
+     ok?.setOnClickListener{
 
+         viewModel.DeleteItem(id)
+
+         bottomSheetDialog.cancel()
+     }
+
+     bottomSheetDialog.show()
+ }
 
 
 // bottom sheet dialog to add item in list

@@ -20,7 +20,7 @@ class ItemViewModel(val datasource:ListDatabaseDao,val id: Long) : ViewModel() {
             _item.value=  getItemList()
         }
     }
-
+ // insert item in database
     fun insert_list(item: Item){
 
         viewModelScope.launch {
@@ -33,6 +33,8 @@ class ItemViewModel(val datasource:ListDatabaseDao,val id: Long) : ViewModel() {
         }
 
     }
+
+    // get all items
    suspend fun getItemList():List<Item>{
 
        return withContext(Dispatchers.IO) {
@@ -42,7 +44,7 @@ class ItemViewModel(val datasource:ListDatabaseDao,val id: Long) : ViewModel() {
 
     }
 
-
+    // update item
     fun updateItem(item: Item){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
@@ -58,15 +60,15 @@ class ItemViewModel(val datasource:ListDatabaseDao,val id: Long) : ViewModel() {
         }
     }
 
-//    fun deleteAllList(){
-//        viewModelScope.launch {
-//            datasource.deleteAllList()
-////            val query = SimpleSQLiteQuery(
-////                    "DROP TABLE ItemList")
-////            datasource.deleteAllList(query)
-//            getItemList()
-//        }
- //   }
+   // delete a item
+    fun DeleteItem(id:Long){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                datasource.DeleteItem(id)
+            }
+            _item.value=getItemList()
+        }
+    }
 
 
 

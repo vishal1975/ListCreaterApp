@@ -23,7 +23,9 @@ interface ListDatabaseDao {
     @Update
     suspend fun updateItem(item: Item)
 
-
+    // Deleting a item
+    @Query("DELETE FROM Item WHERE itemId=:id ")
+    suspend fun DeleteItem(id: Long)
 
     // insert the list
     @Insert

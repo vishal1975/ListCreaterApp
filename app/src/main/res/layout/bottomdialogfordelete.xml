@@ -21,8 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:fontFamily="@font/satisfyregular"
+            android:textColor="@color/red_700"
             android:text="ARE YOU SURE YOU WANT TO DELETE THIS"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/ok"
@@ -31,6 +33,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="OK"
+            style="@style/Widget.MaterialComponents.Button.Icon"
             android:textSize="30sp" />
 
     </LinearLayout>
