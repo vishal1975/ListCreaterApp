@@ -44,6 +44,7 @@
                         android:layout_marginRight="3dp"
                         android:text="Quantity"
                         android:paddingLeft="3dp"
+                        style="@style/Widget.MaterialComponents.TextView"
                         android:textColor="@color/red_900"
                         android:fontFamily="@font/satisfyregular"
                         android:textSize="20sp"/>

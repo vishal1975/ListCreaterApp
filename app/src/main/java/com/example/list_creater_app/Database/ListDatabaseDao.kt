@@ -19,7 +19,9 @@ interface ListDatabaseDao {
     @Query("SELECT * FROM Item WHERE list_id=:list_id")
     suspend fun getAllItem(list_id: Long):List<Item>
 
-
+    // to update the item
+    @Update
+    suspend fun updateItem(item: Item)
 
 
 

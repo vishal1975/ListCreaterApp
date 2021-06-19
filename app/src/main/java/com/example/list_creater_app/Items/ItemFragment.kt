@@ -38,13 +38,15 @@ class ItemFragment : Fragment() {
         val manager = LinearLayoutManager(activity)
         binding.item.layoutManager = manager
         viewModel._item.observe(viewLifecycleOwner,{
-            adapter.submitList(it)
-            setQuantityAmount(it)
+            if(it!=null) {
+                adapter.submitList(it)
+                setQuantityAmount(it)
+            }
         })
 
         //Toast.makeText(activity,"hello $id",Toast.LENGTH_LONG).show()
         binding.addItem.setOnClickListener {
-            showBottomSheetDialogToAddItemInList(id)
+            showBottomSheetDialogToAddOrEditItemInList(id)
         }
         setClickHandlerForItemRecyclerView()
 
@@ -69,7 +71,7 @@ class ItemFragment : Fragment() {
         adapter.seTitemAdapterClickHandler(object :ItemAdapterClickHandler{
             override fun info(item: Item) {
                 showBottomSheetDialogToShowItemInList(item)
-                //showBottomSheetDialogToAddItemInList(1)
+
             }
 
         })
@@ -87,6 +89,19 @@ private fun showBottomSheetDialogToShowItemInList(item: Item){
     val quantityUnit=bottomSheetDialog.findViewById<TextView>(R.id.quantityUnit)
     val rate=bottomSheetDialog.findViewById<TextView>(R.id.rate)
     val description=bottomSheetDialog.findViewById<TextView>(R.id.description)
+    val edit=bottomSheetDialog.findViewById<ImageView>(R.id.edit)
+    val delete=bottomSheetDialog.findViewById<ImageView>(R.id.delete)
+
+    // setting the clicklistner for edit
+    edit?.setOnClickListener(){
+        showBottomSheetDialogToAddOrEditItemInList(item.list_id,1,item)
+     bottomSheetDialog.cancel()
+    }
+    // setting the clicklistner for delete
+    delete?.setOnClickListener(){
+
+    }
+
 
     // setting the content of views
 
@@ -99,38 +114,79 @@ private fun showBottomSheetDialogToShowItemInList(item: Item){
 
 }
 
+// bottom sheet dialog to edit item list
 
 
 
 
 // bottom sheet dialog to add item in list
-private fun showBottomSheetDialogToAddItemInList(id:Long) {
+private fun showBottomSheetDialogToAddOrEditItemInList(id:Long,flag:Int=0,item:Item?=null) {
     val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
     bottomSheetDialog.setContentView(R.layout.additem)
     bottomSheetDialog.setCanceledOnTouchOutside(true)
     val add: Button? =bottomSheetDialog.findViewById(R.id.add)
-    add?.setText("ADD")
+    // editext for quantity
+    val quantity=bottomSheetDialog.findViewById<EditText>(R.id.quantity)
+    // editext for amount
+    val amount=bottomSheetDialog.findViewById<EditText>(R.id.amount)
+    // editext for itemName
+    val itemName=bottomSheetDialog.findViewById<EditText>(R.id.itemName)
+    // editext for description
+    val description=bottomSheetDialog.findViewById<EditText>(R.id.description)
+    // spinner
+    val spinner=bottomSheetDialog.findViewById<Spinner>(R.id.weightspinner)
+    val adapter=ArrayAdapter.createFromResource(requireContext(),
+            R.array.weightUnit, android.R.layout.simple_spinner_item)
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    spinner?.adapter=adapter
+    // unit of item
+    var unit=spinner?.selectedItem.toString()
+    // checking whether we have to edit or add
+    if(flag==1 && item!=null){
+        add?.setText("Update")
+        // setting the text for respective field
+        itemName?.setText(item.itemName)
+        quantity?.setText(item.quantity.toString())
+        amount?.setText(item.amount.toString())
+        description?.setText(item.itemDescription)
+    }
+    else {
+        add?.setText("ADD")
+    }
     add?.setOnClickListener{
-        val itemName=bottomSheetDialog.findViewById<EditText>(R.id.itemName)
-        val quantity=bottomSheetDialog.findViewById<EditText>(R.id.quantity)
-        val amount=bottomSheetDialog.findViewById<EditText>(R.id.amount)
-        val description=bottomSheetDialog.findViewById<EditText>(R.id.description)
-        val spinner=bottomSheetDialog.findViewById<Spinner>(R.id.weightspinner)
-        val adapter=ArrayAdapter.createFromResource(requireContext(),
-        R.array.weightUnit, android.R.layout.simple_spinner_item)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner?.adapter=adapter
-        var unit=spinner?.selectedItem.toString()
+
+
+        // checking the quantity
+        if(quantity?.text.toString().isEmpty()){
+            quantity?.setText("0")
+        }
+       // checking the amount
+        if(amount?.text.toString().isEmpty()){
+            amount?.setText("0")
+        }
+       // checking the unit
         if(unit=="None"){
             unit=""
         }
-        val item= Item(list_id = id,itemName = itemName?.text.toString(),quantity = quantity?.text.toString().toFloat(),
-        amount = amount?.text.toString().toFloat(),
-        itemDescription = description?.text.toString(),
-                quantityUnit = unit
-        )
-       viewModel.insert_list(item)
+         if(flag==1 && item!=null){
+             val newitem = Item(list_id = id, itemName = itemName?.text.toString(), quantity = quantity?.text.toString().toDouble(),
+                     amount = amount?.text.toString().toDouble(),
+                     itemDescription = description?.text.toString(),
+                     quantityUnit = unit,
+                     itemId = item.itemId)
+             viewModel.updateItem(newitem)
+             Toast.makeText(requireContext(),"$id , ${item.list_id}",Toast.LENGTH_LONG).show()
+         }
+        else {
+             // setting the item
+             val newitem = Item(list_id = id, itemName = itemName?.text.toString(), quantity = quantity?.text.toString().toDouble(),
+                     amount = amount?.text.toString().toDouble(),
+                     itemDescription = description?.text.toString(),
+                     quantityUnit = unit
+             )
+             viewModel.insert_list(newitem)
 
+         }
         bottomSheetDialog.cancel()
     }
 

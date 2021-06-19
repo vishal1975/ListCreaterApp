@@ -14,29 +14,54 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/itemName"
+<!--             edittext for itemName-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:gravity="start|top"
-            android:hint="Enter Item Name"
-            android:inputType="textMultiLine" />
+            android:hint="Item Name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/itemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
-            android:gravity="start|top"
-            android:hint="Enter Item Quantity"
-            android:inputType="numberDecimal" />
+<!--            editext for quantity-->
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+               app:counterEnabled="true"
+                android:hint="Quantity"
+                app:counterMaxLength="4"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:maxLength="4"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--          spinner-->
             <Spinner
                 android:id="@+id/weightspinner"
                 android:layout_width="wrap_content"
@@ -44,34 +69,59 @@
                 android:layout_height="match_parent"
                 android:entries="@array/weightUnit"/>
         </LinearLayout>
-        <EditText
-            android:id="@+id/amount"
+
+<!--        edittext for rate-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextField3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            android:layout_margin="10dp"
+            android:hint="Rate"
+            app:counterMaxLength="4"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:maxLength="4"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+<!--        editext for description-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextField4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:gravity="start|top"
-            android:hint="Enter the amount of Item"
-            android:inputType="numberDecimal" />
-        <EditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="start|top"
-            android:maxLines="2"
-            android:hint="Enter short Description about item"
-            android:inputType="textMultiLine" />
+            android:hint="Description"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
+<!--         Add button-->
         <Button
             android:id="@+id/add"
+            style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="5dp"
             android:layout_gravity="center"
             android:text="ADD"
+            app:icon="@drawable/plus"
+            app:iconSize="20dp"
             />
 
     </LinearLayout>
