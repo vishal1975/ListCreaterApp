@@ -43,8 +43,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
 
-                    android:paddingTop="@dimen/spacing_middle"
-                    android:paddingBottom="@dimen/spacing_middle"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
 
                     app:layout_constraintEnd_toStartOf="@+id/linearLayout"
@@ -58,8 +58,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/satisfyregular"
                         android:textColor="@color/black"
-                        android:padding="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="3dp"
                         android:text="People Name"
+                        android:textSize="25sp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                          />
 
@@ -68,11 +70,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:layout_marginTop="@dimen/spacing_medium"
+
                         android:fontFamily="@font/satisfyregular"
                         android:textColor="@color/black"
                         android:maxLines="2"
-                        android:padding="10dp"
+                        android:paddingRight="10dp"
+
                         android:text="items1"
 
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"

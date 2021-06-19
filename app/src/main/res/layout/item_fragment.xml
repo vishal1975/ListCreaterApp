@@ -12,28 +12,140 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".Items.ItemFragment">
+        <!--        layout for displaying quantity and rate-->
+        <LinearLayout
+            android:id="@+id/lyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="3dp"
+            app:layout_constraintBottom_toTopOf="@+id/item"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--            layout for quantity-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="3dp"
+                        android:text="Quantity"
+                        android:paddingLeft="3dp"
+                        android:textColor="@color/red_900"
+                        android:fontFamily="@font/satisfyregular"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@id/quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="5"
+                        android:textColor="@color/red_900"
+                        android:fontFamily="@font/satisfyregular"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="3dp"
+                        android:text="Amount"
+                        android:fontFamily="@font/satisfyregular"
+                        android:textSize="20sp"
+                        android:textColor="@color/red_900"
+                         />
+
+                    <TextView
+                        android:id="@+id/rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="5"
+                        android:fontFamily="@font/satisfyregular"
+                        android:textSize="20sp"
+                        android:textColor="@color/red_900"
+                         />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="159dp"
-            tools:layout_editor_absoluteY="308dp" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/lyt"
+            tools:layout_editor_absoluteX="159dp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addItem"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.926"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.954"
-            android:layout_width="wrap_content"
+        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--            android:id="@+id/addItem"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.926"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.954"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:clickable="true"-->
+        <!--            android:src="@drawable/plus"-->
+        <!--            tools:layout_editor_absoluteX="323dp"-->
+        <!--            tools:layout_editor_absoluteY="621dp" />-->
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:src="@drawable/plus"
-            tools:layout_editor_absoluteX="323dp"
-            tools:layout_editor_absoluteY="621dp" />
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item"
+            tools:layout_editor_absoluteX="50dp">
 
+
+            <Button
+                android:id="@+id/addItem"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="ADD"
+                app:icon="@drawable/plus"
+                app:iconSize="20dp"
+                tools:layout_editor_absoluteX="293dp"
+                tools:layout_editor_absoluteY="667dp" />
+
+            <Button
+                android:id="@+id/share"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="SHARE"
+                app:icon="@drawable/share"
+                app:iconSize="20dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="667dp" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

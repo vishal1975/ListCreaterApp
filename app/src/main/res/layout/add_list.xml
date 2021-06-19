@@ -29,14 +29,26 @@
             android:inputType="textMultiLine" />
 
 
+<!--        <Button-->
+<!--            android:id="@+id/add"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="create"-->
+<!--             />-->
         <Button
             android:id="@+id/add"
+            style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:text="create"
-             />
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="add"
+            app:icon="@drawable/plus"
+            app:iconSize="20dp"
+            />
 
     </LinearLayout>
 

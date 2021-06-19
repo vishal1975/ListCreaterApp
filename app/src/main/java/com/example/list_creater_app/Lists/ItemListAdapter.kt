@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,6 +16,7 @@ import com.example.list_creater_app.Database.ItemList
 import com.example.list_creater_app.R
 import com.example.list_creater_app.databinding.ItemListItemsBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.launch
 
 class ItemListAdapter(val viewModel: ListViewModel): ListAdapter<ItemList, ItemListAdapter.ViewHolder>(ItemListDiffCallback()) {
     lateinit var itemListAdapterClickHandle:ItemListAdapterClickHandle
@@ -40,16 +42,20 @@ class ItemListAdapter(val viewModel: ListViewModel): ListAdapter<ItemList, ItemL
             binding.listName.text=item.listName
 
             binding.click.setOnClickListener {
-              //  it.findNavController().navigate(ListFragmentDirections.actionListFragmentToItemFragment().setId(item.listId))
+
                 itemListAdapterClickHandle.layoutClick(item.listId)
 
             }
             binding.delete.setOnClickListener{
                 itemListAdapterClickHandle.onDelete(item.listId)
-                //showBottomSheetDialog(viewModel,item.listId)
+
             }
             binding.edit.setOnClickListener(){
                 itemListAdapterClickHandle.onEdit(item)
+            }
+            viewModel.viewModelScope.launch {
+                val count=viewModel.countItem(item.listId)
+                binding.count.text="items $count"
             }
 
             binding.executePendingBindings()

@@ -64,6 +64,12 @@ init {
             _itemList.value= getItemList()
         }
     }
+    suspend fun countItem(id:Long):Long{
+
+        return withContext(Dispatchers.IO) {
+            datasource.countItem(id )
+        }
+    }
 
 
 }

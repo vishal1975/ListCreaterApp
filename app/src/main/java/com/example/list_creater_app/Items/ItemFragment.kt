@@ -39,6 +39,7 @@ class ItemFragment : Fragment() {
         binding.item.layoutManager = manager
         viewModel._item.observe(viewLifecycleOwner,{
             adapter.submitList(it)
+            setQuantityAmount(it)
         })
 
         //Toast.makeText(activity,"hello $id",Toast.LENGTH_LONG).show()
@@ -51,6 +52,19 @@ class ItemFragment : Fragment() {
     }
 
 
+
+
+    // setting the quantity and amount of list
+    fun setQuantityAmount(item: List<Item>){
+        var totalQuantity:Double=0.0
+        var totalAmount:Double=0.0
+        for(items in item){
+            totalQuantity+=items.quantity
+            totalAmount+=items.quantity*items.amount
+        }
+        binding.quantity.text=totalQuantity.toString()
+        binding.rate.text=totalAmount.toString()
+    }
     fun setClickHandlerForItemRecyclerView(){
         adapter.seTitemAdapterClickHandler(object :ItemAdapterClickHandler{
             override fun info(item: Item) {

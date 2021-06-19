@@ -62,5 +62,10 @@ interface ListDatabaseDao {
 
 
 
+    // count no of item in list
+    @Query("SELECT COUNT(*) FROM Item WHERE list_id=:id")
+    suspend fun countItem(id:Long):Long
+
+
 }
 

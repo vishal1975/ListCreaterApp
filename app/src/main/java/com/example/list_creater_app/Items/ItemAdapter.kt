@@ -33,8 +33,8 @@ class ItemAdapter: ListAdapter<Item, ItemAdapter.ViewHolder>(ItemDiffCallback())
 
         fun bind(item: Item) {
             binding.itemName.text=item.itemName
-            binding.quantity.text="Quantity +${item.quantity}"
-            binding.rate.text="Rate +${item.amount}"
+            binding.quantity.text="Quantity  ${item.quantity}"
+            binding.rate.text="Rate  ${item.amount}"
              binding.info.setOnClickListener(){
                  itemAdapterClickHandler.info(item)
              }
