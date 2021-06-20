@@ -53,9 +53,9 @@ class ItemListAdapter(val viewModel: ListViewModel): ListAdapter<ItemList, ItemL
             binding.edit.setOnClickListener(){
                 itemListAdapterClickHandle.onEdit(item)
             }
-            binding.share.setOnClickListener(){
-                itemListAdapterClickHandle.onShare(item.listId)
-            }
+//            binding.share.setOnClickListener(){
+//                itemListAdapterClickHandle.onShare(item.listId)
+//            }
             viewModel.viewModelScope.launch {
                 val count=viewModel.countItem(item.listId)
                 binding.count.text="items $count"

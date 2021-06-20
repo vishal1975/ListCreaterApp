@@ -1,5 +1,7 @@
 package com.example .list_creater_app.Items
 
+import android.app.Notification
+import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.list_creater_app.Database.Item
 import com.example.list_creater_app.Database.ListDatabase
 import com.example.list_creater_app.R
 import com.example.list_creater_app.databinding.ItemFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import android.content.DialogInterface.OnMultiChoiceClickListener
+import android.content.Intent
 
 class ItemFragment : Fragment() {
 
@@ -22,6 +27,8 @@ class ItemFragment : Fragment() {
     private lateinit var binding:ItemFragmentBinding
     lateinit var viewModel:ItemViewModel
     lateinit var adapter:ItemAdapter
+    var final_totalItems=0
+    var final_totalAmount=0.0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,24 +55,93 @@ class ItemFragment : Fragment() {
         binding.addItem.setOnClickListener {
             showBottomSheetDialogToAddOrEditItemInList(id)
         }
+        binding.share.setOnClickListener(){
+            viewModel._item.value?.let { it1 -> share(it1) }
+        }
         setClickHandlerForItemRecyclerView()
 
         return binding.root
     }
 
 
+   // alert dialog to share a list
+   fun share(itemList:List<Item>){
+       val items= arrayOf("ItemName", "Quantity", "Rate", "Description", "Total Items", "Total Amount")
+       val checkedItems= booleanArrayOf(true, false, false, false, false, false)
+       val builder = AlertDialog.Builder(requireContext())
+       builder.setTitle("Select the Item you want to Share")
+       builder.setMultiChoiceItems(items, checkedItems, OnMultiChoiceClickListener
+       { dialogInterface, i, b ->
+           checkedItems[i] = b
+       })
+       builder.setPositiveButton("OK", DialogInterface.OnClickListener
+       { dialogInterface, i ->
+
+           val s = StringBuilder()
+//           for (i in 0..checkedItems.size - 1) {
+//               if (checkedItems[i]) {
+//                   s.append(items[i])
+//                   s.append(": ")
+//               }
+//           }
+           for(item in itemList) {
+               if (checkedItems[0]) {
+                   s.append(item.itemName).append("\n\n")
+               }
+               if(checkedItems[1]){
+                   s.append(items[1]).append(": ").append(item.quantity).append(" ").append(item.quantityUnit).append("\n")
+               }
+               if(checkedItems[2]){
+                   s.append(items[2]).append(": ").append(item.amount).append("\n")
+               }
+               if(checkedItems[3]){
+                   s.append(items[3]).append(": ").append(item.itemDescription).append("\n")
+
+               }
+               s.append("------------  END --------------------").append("\n")
+           }
+           if(checkedItems[4]){
+           s.append(items[4]).append(" ").append(final_totalItems).append("\n")
+           }
+           if(checkedItems[5]){
+               s.append(items[5]).append(" ").append(final_totalAmount).append("\n")
+           }
+
+           val intent=Intent().apply {
+               action=Intent.ACTION_SEND
+               type="text/plain"
+               putExtra(Intent.EXTRA_TEXT,s.toString())
+           }
+           startActivity(Intent.createChooser(intent, "choose the app to share your list"))
+
+
+           //Toast.makeText(requireContext(), s.toString(), Toast.LENGTH_LONG).show()
+
+       })
+       builder.setNegativeButton("CANCEL", null)
+       builder.show()
+   }
+
+
+
 
 
     // setting the quantity and amount of list
     fun setQuantityAmount(item: List<Item>){
-        var totalQuantity:Double=0.0
-        var totalAmount:Double=0.0
+        var totalAmount=0.0
         for(items in item){
-            totalQuantity+=items.quantity
+
+            if(items.quantityUnit=="")
             totalAmount+=items.quantity*items.amount
+            else{
+                totalAmount+=items.amount
+            }
         }
-        binding.quantity.text=totalQuantity.toString()
+        binding.totalItems.text=item.size.toString()
         binding.rate.text=totalAmount.toString()
+        final_totalAmount=totalAmount
+        final_totalItems=item.size
+
     }
     fun setClickHandlerForItemRecyclerView(){
         adapter.seTitemAdapterClickHandler(object :ItemAdapterClickHandler{
@@ -76,6 +152,9 @@ class ItemFragment : Fragment() {
 
         })
     }
+
+
+    // bottom sheet dialog to show the item
 
 private fun showBottomSheetDialogToShowItemInList(item: Item){
     val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(requireContext())
@@ -155,7 +234,6 @@ private fun showBottomSheetDialogToAddOrEditItemInList(id:Long,flag:Int=0,item:I
     spinner?.adapter=adapter
 
     // unit of item
-    var unit=spinner?.selectedItem.toString()
 
     // checking whether we have to edit or add
     if(flag==1 && item!=null){
@@ -170,7 +248,8 @@ private fun showBottomSheetDialogToAddOrEditItemInList(id:Long,flag:Int=0,item:I
         add?.setText("ADD")
     }
     add?.setOnClickListener{
-
+        var unit=spinner?.selectedItem.toString()
+        Toast.makeText(requireContext(),unit,Toast.LENGTH_LONG).show()
 
         // checking the quantity
         if(quantity?.text.toString().isEmpty()){
@@ -191,7 +270,7 @@ private fun showBottomSheetDialogToAddOrEditItemInList(id:Long,flag:Int=0,item:I
                      quantityUnit = unit,
                      itemId = item.itemId)
              viewModel.updateItem(newitem)
-             Toast.makeText(requireContext(),"$id , ${item.list_id}",Toast.LENGTH_LONG).show()
+             //Toast.makeText(requireContext(),"$id , ${item.list_id}",Toast.LENGTH_LONG).show()
          }
         else {
              // setting the item

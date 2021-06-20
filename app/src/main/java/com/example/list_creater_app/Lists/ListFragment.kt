@@ -89,7 +89,7 @@ class ListFragment : Fragment() {
             }
 
             override fun onShare(id: Long) {
-                share()
+               // share()
             }
 
 
@@ -99,31 +99,31 @@ class ListFragment : Fragment() {
 
 
     // Alert Dialog for share
-    fun share(){
-        val items= arrayOf("ItemName", "Quantity", "Rate", "Description", "Total Quantity", "Total Amount")
-        val checkedItems= booleanArrayOf(true, false, false, false, false, false)
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Select the Item you want to Share")
-        builder.setMultiChoiceItems(items, checkedItems, OnMultiChoiceClickListener
-        { dialogInterface, i, b ->
-            checkedItems[i] = b
-        })
-        builder.setPositiveButton("OK", DialogInterface.OnClickListener
-        { dialogInterface, i ->
-
-            val s = StringBuilder()
-            for (i in 0..checkedItems.size - 1) {
-                if (checkedItems[i]) {
-                    s.append(items[i])
-                    s.append(" ")
-                }
-            }
-            Toast.makeText(requireContext(), s.toString(), Toast.LENGTH_LONG).show()
-
-        })
-        builder.setNegativeButton("CANCEL", null)
-        builder.show()
-    }
+//    fun share(){
+//        val items= arrayOf("ItemName", "Quantity", "Rate", "Description", "Total Quantity", "Total Amount")
+//        val checkedItems= booleanArrayOf(true, false, false, false, false, false)
+//        val builder = AlertDialog.Builder(requireContext())
+//        builder.setTitle("Select the Item you want to Share")
+//        builder.setMultiChoiceItems(items, checkedItems, OnMultiChoiceClickListener
+//        { dialogInterface, i, b ->
+//            checkedItems[i] = b
+//        })
+//        builder.setPositiveButton("OK", DialogInterface.OnClickListener
+//        { dialogInterface, i ->
+//
+//            val s = StringBuilder()
+//            for (i in 0..checkedItems.size - 1) {
+//                if (checkedItems[i]) {
+//                    s.append(items[i])
+//                    s.append(" ")
+//                }
+//            }
+//            Toast.makeText(requireContext(), s.toString(), Toast.LENGTH_LONG).show()
+//
+//        })
+//        builder.setNegativeButton("CANCEL", null)
+//        builder.show()
+//    }
 
     // bottom sheet dialog to update the list
     private fun showBottomSheetDialogForUpdateList(itemlist: ItemList) {
