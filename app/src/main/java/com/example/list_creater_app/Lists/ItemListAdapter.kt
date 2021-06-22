@@ -43,7 +43,7 @@ class ItemListAdapter(val viewModel: ListViewModel): ListAdapter<ItemList, ItemL
 
             binding.click.setOnClickListener {
 
-                itemListAdapterClickHandle.layoutClick(item.listId)
+                itemListAdapterClickHandle.layoutClick(item.listId,item.listName)
 
             }
             binding.delete.setOnClickListener{
@@ -87,7 +87,7 @@ class ItemListDiffCallback : DiffUtil.ItemCallback<ItemList>() {
 
 
 interface ItemListAdapterClickHandle{
-    fun layoutClick(id:Long)
+    fun layoutClick(id:Long,name:String)
     fun onDelete(id:Long)
     fun onEdit(item: ItemList)
     fun onShare(id:Long)

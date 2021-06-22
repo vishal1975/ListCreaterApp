@@ -32,18 +32,32 @@
             app:layout_constraintVertical_bias="0.93">
 
 
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="44dp"
             android:clickable="true"
-            android:src="@drawable/plus"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-            />
+            app:layout_constraintBottom_toBottomOf="@+id/all_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/add" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+        <ImageView
+            android:id="@+id/emptylist"
+            android:layout_width="269dp"
+            android:layout_height="341dp"
+            android:layout_marginBottom="28dp"
+            app:layout_constraintBottom_toTopOf="@+id/add_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/all_list"
+            app:srcCompat="@drawable/emptylist" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

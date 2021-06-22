@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
-    app:startDestination="@id/listFragment">
+    app:startDestination="@id/dashboard">
 
     <fragment
         android:id="@+id/listFragment"
@@ -19,5 +19,20 @@
             android:name="id"
             app:argType="long"
             android:defaultValue="0L" />
+        <argument
+            android:name="listname"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboard"
+        android:name="com.example.list_creater_app.DashBoard.dashboardFragment"
+        android:label="dashboard" >
+        <action
+            android:id="@+id/action_dashboard_to_listFragment2"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_itemFragment"
+            app:destination="@id/itemFragment" />
     </fragment>
 </navigation>

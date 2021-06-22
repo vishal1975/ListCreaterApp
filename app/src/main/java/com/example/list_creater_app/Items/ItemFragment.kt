@@ -18,6 +18,11 @@ import com.example.list_creater_app.databinding.ItemFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.content.DialogInterface.OnMultiChoiceClickListener
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import com.example.list_creater_app.Items.ItemAdapter
+import com.example.list_creater_app.Items.ItemFragmentArgs
+import com.example.list_creater_app.Items.ItemViewModel
+import com.example.list_creater_app.Items.ItemViewModelFactory
 
 class ItemFragment : Fragment() {
 
@@ -25,8 +30,8 @@ class ItemFragment : Fragment() {
 
 
     private lateinit var binding:ItemFragmentBinding
-    lateinit var viewModel:ItemViewModel
-    lateinit var adapter:ItemAdapter
+    lateinit var viewModel: ItemViewModel
+    lateinit var adapter: ItemAdapter
     var final_totalItems=0
     var final_totalAmount=0.0
     override fun onCreateView(
@@ -37,7 +42,8 @@ class ItemFragment : Fragment() {
         binding= ItemFragmentBinding.inflate(inflater,container,false)
         val application = requireNotNull(this.activity).application
         val datasource= ListDatabase.getInstance(application).sleepDatabaseDao
-        val id=ItemFragmentArgs.fromBundle(arguments).id
+        val id= ItemFragmentArgs.fromBundle(arguments).id
+        val name=ItemFragmentArgs.fromBundle(arguments).listname
         val itemViewModelFactory=ItemViewModelFactory(datasource,id)
         viewModel = ViewModelProvider(this,itemViewModelFactory).get(ItemViewModel::class.java)
         adapter= ItemAdapter()
@@ -48,6 +54,12 @@ class ItemFragment : Fragment() {
             if(it!=null) {
                 adapter.submitList(it)
                 setQuantityAmount(it)
+                if(it.size==0){
+                    binding.emptyitem.visibility=View.VISIBLE
+                }
+                else{
+                    binding.emptyitem.visibility=View.GONE
+                }
             }
         })
 
@@ -59,7 +71,8 @@ class ItemFragment : Fragment() {
             viewModel._item.value?.let { it1 -> share(it1) }
         }
         setClickHandlerForItemRecyclerView()
-
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        (requireActivity() as AppCompatActivity).supportActionBar?.title= "$name"
         return binding.root
     }
 
@@ -69,7 +82,7 @@ class ItemFragment : Fragment() {
        val items= arrayOf("ItemName", "Quantity", "Rate", "Description", "Total Items", "Total Amount")
        val checkedItems= booleanArrayOf(true, false, false, false, false, false)
        val builder = AlertDialog.Builder(requireContext())
-       builder.setTitle("Select the Item you want to Share")
+       builder.setTitle("Select the Item Property you want to Share")
        builder.setMultiChoiceItems(items, checkedItems, OnMultiChoiceClickListener
        { dialogInterface, i, b ->
            checkedItems[i] = b
@@ -78,12 +91,7 @@ class ItemFragment : Fragment() {
        { dialogInterface, i ->
 
            val s = StringBuilder()
-//           for (i in 0..checkedItems.size - 1) {
-//               if (checkedItems[i]) {
-//                   s.append(items[i])
-//                   s.append(": ")
-//               }
-//           }
+
            for(item in itemList) {
                if (checkedItems[0]) {
                    s.append(item.itemName).append("\n\n")
@@ -115,7 +123,7 @@ class ItemFragment : Fragment() {
            startActivity(Intent.createChooser(intent, "choose the app to share your list"))
 
 
-           //Toast.makeText(requireContext(), s.toString(), Toast.LENGTH_LONG).show()
+
 
        })
        builder.setNegativeButton("CANCEL", null)
@@ -249,7 +257,7 @@ private fun showBottomSheetDialogToAddOrEditItemInList(id:Long,flag:Int=0,item:I
     }
     add?.setOnClickListener{
         var unit=spinner?.selectedItem.toString()
-        Toast.makeText(requireContext(),unit,Toast.LENGTH_LONG).show()
+
 
         // checking the quantity
         if(quantity?.text.toString().isEmpty()){
@@ -270,7 +278,8 @@ private fun showBottomSheetDialogToAddOrEditItemInList(id:Long,flag:Int=0,item:I
                      quantityUnit = unit,
                      itemId = item.itemId)
              viewModel.updateItem(newitem)
-             //Toast.makeText(requireContext(),"$id , ${item.list_id}",Toast.LENGTH_LONG).show()
+
+             
          }
         else {
              // setting the item

@@ -10,10 +10,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.list_creater_app.DashBoard.dashboardFragmentDirections
+import com.example.list_creater_app.DashBoard.dashboardFragmentDirections.actionDashboardToItemFragment
 import com.example.list_creater_app.Database.ItemList
 import com.example.list_creater_app.Database.ListDatabase
 import com.example.list_creater_app.R
@@ -61,21 +64,58 @@ class ListFragment : Fragment() {
 
         // observing the itemList
            viewModel._itemList.observe(viewLifecycleOwner){
+               if(it!=null) {
+                   adapter.submitList(it)
+                  if(it.size==0){
+                      binding.emptylist.visibility=View.VISIBLE
+                  }
+                   else{
+                      binding.emptylist.visibility=View.GONE
+                  }
 
-               adapter.submitList(it)
+               }
 
            }
 
 
-        setListRecyclerViewItemClickHandler()
 
+        // observing the ok button
+
+
+
+        viewModel.ok.observe(viewLifecycleOwner){
+            if(it){
+
+                val size: Int? = viewModel._itemList.value?.size?.minus(1)
+                if(size!=null) {
+
+                    val id: Long? = viewModel._itemList.value?.get(size)?.listId
+                    val name:String?=viewModel._itemList.value?.get(size)?.listName
+                    if(id!=null && name!=null) {
+                        findNavController().navigate(ListFragmentDirections.actionListFragmentToItemFragment().setId(id).setListname(name))
+
+                    }
+                }
+                viewModel.ok.value=false
+            }
+        }
+
+
+
+
+        // observing end
+
+
+        setListRecyclerViewItemClickHandler()
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        (requireActivity() as AppCompatActivity).supportActionBar?.title="Your Lists"
         return binding.root
     }
 
     private fun setListRecyclerViewItemClickHandler() {
         adapter.seTItemListAdapterClickHandle(object : ItemListAdapterClickHandle {
-            override fun layoutClick(id: Long) {
-                findNavController().navigate(ListFragmentDirections.actionListFragmentToItemFragment().setId(id))
+            override fun layoutClick(id: Long,name:String) {
+                findNavController().navigate(ListFragmentDirections.actionListFragmentToItemFragment().setId(id).setListname(name))
             }
 
             override fun onDelete(id: Long) {
@@ -156,7 +196,7 @@ class ListFragment : Fragment() {
         create?.setOnClickListener{
             val text=bottomSheetDialog.findViewById<EditText>(R.id.add_list_name)
             val item=ItemList(listName = text?.text.toString())
-            viewModel.insert_list(item)
+            viewModel.clicked(item)
 
             bottomSheetDialog.cancel()
         }

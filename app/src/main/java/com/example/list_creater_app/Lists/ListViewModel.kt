@@ -7,21 +7,23 @@ import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.list_creater_app.Database.ItemList
 import com.example.list_creater_app.Database.ListDatabaseDao
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
 class ListViewModel(val datasource: ListDatabaseDao) : ViewModel() {
     var _itemList= MutableLiveData<List<ItemList>?>()
+    val ok=MutableLiveData<Boolean>(false)
 init {
     viewModelScope.launch {
         _itemList.value=getItemList()
     }
 }
 
-    fun insert_list(itemList: ItemList){
+    suspend fun insert_list(itemList: ItemList):Job{
 
-        viewModelScope.launch{
+        return viewModelScope.launch{
             withContext(Dispatchers.IO) {
                 datasource.insertItemList(itemList)
             }
@@ -70,6 +72,14 @@ init {
             datasource.countItem(id )
         }
     }
+    fun clicked(itemList: ItemList){
+        viewModelScope.launch {
 
+            val job: Job = insert_list(itemList)
+            job.join()
+
+            ok.value=true
+        }
+    }
 
 }
