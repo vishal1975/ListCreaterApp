@@ -16,11 +16,14 @@
 
 <!--             edittext for itemName-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextField"
+            android:id="@+id/outlinedTextFieldName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="Item Name"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/mic"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -103,11 +106,13 @@
 
 <!--        editext for description-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/outlinedTextField4"
+            android:id="@+id/outlinedTextFieldDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="Description"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/mic"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText

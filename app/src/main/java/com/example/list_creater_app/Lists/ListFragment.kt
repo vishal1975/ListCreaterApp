@@ -1,13 +1,18 @@
 package com.example.list_creater_app.Lists
 
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.DialogInterface.OnMultiChoiceClickListener
+import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +36,10 @@ class ListFragment : Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var viewModel: ListViewModel
     private lateinit var adapter: ItemListAdapter
+    var text:EditText?=null
+    var bottomSheetDialog:BottomSheetDialog?=null
+    private  val SPEECH_REQUEST_CODE= 0
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -109,6 +118,7 @@ class ListFragment : Fragment() {
         setListRecyclerViewItemClickHandler()
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         (requireActivity() as AppCompatActivity).supportActionBar?.title="Your Lists"
+        (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.deep_purple_300)))
         return binding.root
     }
 
@@ -167,41 +177,54 @@ class ListFragment : Fragment() {
 
     // bottom sheet dialog to update the list
     private fun showBottomSheetDialogForUpdateList(itemlist: ItemList) {
-        val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
-        bottomSheetDialog.setContentView(R.layout.add_list)
-        bottomSheetDialog.setCanceledOnTouchOutside(true)
-        val text=bottomSheetDialog.findViewById<EditText>(R.id.add_list_name)
+        bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
+        bottomSheetDialog?.setContentView(R.layout.add_list)
+        bottomSheetDialog?.setCanceledOnTouchOutside(true)
+        text=bottomSheetDialog?.findViewById<EditText>(R.id.add_list_name)
         text?.setText(itemlist.listName)
-        val update: Button? =bottomSheetDialog.findViewById(R.id.add)
+        val update: Button? =bottomSheetDialog?.findViewById(R.id.add)
         update?.setText("Update")
+        val mic: ImageView? =bottomSheetDialog?.findViewById(R.id.mic)
+        mic?.setOnClickListener{
+            displaySpeechRecognizer()
+
+
+        }
         update?.setOnClickListener{
 
             val item=ItemList(listName = text?.text.toString(), listId = itemlist.listId)
             viewModel.updateList(item)
 
-            bottomSheetDialog.cancel()
+            bottomSheetDialog?.cancel()
         }
 
-        bottomSheetDialog.show()
+        bottomSheetDialog?.show()
     }
 
 
     // bottomsheet dialog for adding list name
     private fun showBottomSheetDialogForAddListName() {
-       val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
-        bottomSheetDialog.setContentView(R.layout.add_list)
-        bottomSheetDialog.setCanceledOnTouchOutside(true)
-        val create: Button? =bottomSheetDialog.findViewById(R.id.add)
+        bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
+        bottomSheetDialog?.setContentView(R.layout.add_list)
+        bottomSheetDialog?.setCanceledOnTouchOutside(true)
+        val create: Button? =bottomSheetDialog?.findViewById(R.id.add)
         create?.setText("Create")
+         text=bottomSheetDialog?.findViewById<EditText>(R.id.add_list_name)
+        val mic: ImageView? =bottomSheetDialog?.findViewById(R.id.mic)
+        mic?.setOnClickListener{
+            displaySpeechRecognizer()
+
+
+        }
         create?.setOnClickListener{
-            val text=bottomSheetDialog.findViewById<EditText>(R.id.add_list_name)
+
             val item=ItemList(listName = text?.text.toString())
             viewModel.clicked(item)
 
-            bottomSheetDialog.cancel()
+            bottomSheetDialog?.cancel()
         }
 
-        bottomSheetDialog.show()
+        bottomSheetDialog?.show()
 
     }
 
@@ -221,6 +244,36 @@ class ListFragment : Fragment() {
 
         bottomSheetDialog.show()
 
+    }
+    private fun displaySpeechRecognizer() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+
+        }
+        // This starts the activity and populates the intent with the speech text.
+        startActivityForResult(intent, SPEECH_REQUEST_CODE)
+    }
+
+    // This callback is invoked when the Speech Recognizer returns.
+// This is where you process the intent and extract the speech text from the intent.
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val spokenText: String? =
+                    data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).let { results ->
+                        results?.get(0)
+                    }
+            // Do something with spokenText.
+            if(bottomSheetDialog!=null) {
+                if (bottomSheetDialog?.isShowing == true){
+                    text?.setText(spokenText)
+                }
+            }
+
+
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 

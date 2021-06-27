@@ -18,25 +18,32 @@
         tools:layout_editor_absoluteY="55dp">
 
 
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_margin="5dp"
+             android:orientation="horizontal">
+
 
         <EditText
             android:id="@+id/add_list_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:ems="10"
             android:hint="Enter the List name"
             android:gravity="start|top"
             android:inputType="textMultiLine" />
+             <ImageView
+                 android:id="@+id/mic"
+                 android:layout_marginLeft="0dp"
+                 android:layout_marginRight="10dp"
 
+                 android:layout_width="50dp"
+                 android:layout_height="match_parent"
+                 app:srcCompat="@drawable/mic"/>
 
-<!--        <Button-->
-<!--            android:id="@+id/add"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="center"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="create"-->
-<!--             />-->
+         </LinearLayout>
         <Button
             android:id="@+id/add"
             style="@style/Widget.MaterialComponents.Button.Icon"

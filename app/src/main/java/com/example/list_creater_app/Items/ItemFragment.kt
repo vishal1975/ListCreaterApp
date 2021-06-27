@@ -1,5 +1,6 @@
 package com.example .list_creater_app.Items
 
+import android.app.Activity
 import android.app.Notification
 import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
@@ -18,11 +19,15 @@ import com.example.list_creater_app.databinding.ItemFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.content.DialogInterface.OnMultiChoiceClickListener
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.speech.RecognizerIntent
 import androidx.appcompat.app.AppCompatActivity
 import com.example.list_creater_app.Items.ItemAdapter
 import com.example.list_creater_app.Items.ItemFragmentArgs
 import com.example.list_creater_app.Items.ItemViewModel
 import com.example.list_creater_app.Items.ItemViewModelFactory
+import com.google.android.material.textfield.TextInputLayout
 
 class ItemFragment : Fragment() {
 
@@ -34,6 +39,11 @@ class ItemFragment : Fragment() {
     lateinit var adapter: ItemAdapter
     var final_totalItems=0
     var final_totalAmount=0.0
+    private  val SPEECH_REQUEST_CODE_NAME = 0
+    private  val SPEECH_REQUEST_CODE_DESCRIPTION = 1
+    var itemName:EditText?=null
+    var description:EditText?=null
+    var bottomSheetDialog: BottomSheetDialog?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,6 +83,7 @@ class ItemFragment : Fragment() {
         setClickHandlerForItemRecyclerView()
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         (requireActivity() as AppCompatActivity).supportActionBar?.title= "$name"
+        (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.deep_purple_300)))
         return binding.root
     }
 
@@ -222,24 +233,37 @@ private fun showBottomSheetDialogToShowItemInList(item: Item){
 
 // bottom sheet dialog to add item in list
 private fun showBottomSheetDialogToAddOrEditItemInList(id:Long,flag:Int=0,item:Item?=null) {
-    val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
-    bottomSheetDialog.setContentView(R.layout.additem)
-    bottomSheetDialog.setCanceledOnTouchOutside(true)
-    val add: Button? =bottomSheetDialog.findViewById(R.id.add)
+     bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.DialogStyle)
+    bottomSheetDialog?.setContentView(R.layout.additem)
+    bottomSheetDialog?.setCanceledOnTouchOutside(true)
+    val add: Button? =bottomSheetDialog?.findViewById(R.id.add)
     // editext for quantity
-    val quantity=bottomSheetDialog.findViewById<EditText>(R.id.quantity)
+    val quantity=bottomSheetDialog?.findViewById<EditText>(R.id.quantity)
     // editext for amount
-    val amount=bottomSheetDialog.findViewById<EditText>(R.id.amount)
+    val amount=bottomSheetDialog?.findViewById<EditText>(R.id.amount)
     // editext for itemName
-    val itemName=bottomSheetDialog.findViewById<EditText>(R.id.itemName)
+    itemName=bottomSheetDialog?.findViewById<EditText>(R.id.itemName)
     // editext for description
-    val description=bottomSheetDialog.findViewById<EditText>(R.id.description)
+     description=bottomSheetDialog?.findViewById<EditText>(R.id.description)
     // spinner
-    val spinner=bottomSheetDialog.findViewById<Spinner>(R.id.weightspinner)
+    val spinner=bottomSheetDialog?.findViewById<Spinner>(R.id.weightspinner)
     val adapter=ArrayAdapter.createFromResource(requireContext(),
             R.array.weightUnit, R.layout.spinner_item)
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     spinner?.adapter=adapter
+
+    val outlinedTextFieldName: TextInputLayout? =bottomSheetDialog?.findViewById<TextInputLayout>(R.id.outlinedTextFieldName)
+    val outlinedTextFieldDescription: TextInputLayout? =bottomSheetDialog?.findViewById<TextInputLayout>(R.id.outlinedTextFieldDescription)
+    outlinedTextFieldName?.setEndIconOnClickListener{
+
+        displaySpeechRecognizer(SPEECH_REQUEST_CODE_NAME)
+
+    }
+    outlinedTextFieldDescription?.setEndIconOnClickListener{
+
+        displaySpeechRecognizer(SPEECH_REQUEST_CODE_DESCRIPTION)
+
+    }
 
     // unit of item
 
@@ -291,11 +315,63 @@ private fun showBottomSheetDialogToAddOrEditItemInList(id:Long,flag:Int=0,item:I
              viewModel.insert_list(newitem)
 
          }
-        bottomSheetDialog.cancel()
+        bottomSheetDialog?.cancel()
     }
 
-    bottomSheetDialog.show()
+    bottomSheetDialog?.show()
 
 }
+
+
+
+
+    private fun displaySpeechRecognizer(request_code:Int) {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+
+        }
+        // This starts the activity and populates the intent with the speech text.
+        startActivityForResult(intent, request_code)
+    }
+
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            val spokenText: String? =
+                    data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).let { results ->
+                        results?.get(0)
+                    }
+            // Do something with spokenText.
+
+
+            when(requestCode){
+
+                SPEECH_REQUEST_CODE_NAME ->{
+                    if(bottomSheetDialog!=null) {
+                        if (bottomSheetDialog?.isShowing == true){
+                            itemName?.setText(spokenText)
+                        }
+                    }
+                }
+                SPEECH_REQUEST_CODE_DESCRIPTION->{
+                    if(bottomSheetDialog!=null) {
+                        if (bottomSheetDialog?.isShowing == true){
+                            description?.setText(spokenText)
+                        }
+                    }
+                }
+
+            }
+
+
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+
+
 
 }
