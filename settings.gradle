@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "List_creater_APP"
+rootProject.name = "List Maker"

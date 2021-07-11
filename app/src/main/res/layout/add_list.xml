@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Enter the List name"
+            android:hint="@string/enter_the_list_name"
             android:gravity="start|top"
             android:inputType="textMultiLine" />
              <ImageView
@@ -52,7 +52,7 @@
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="add"
+            android:text="@string/add"
             app:icon="@drawable/plus"
             app:iconSize="20dp"
             />

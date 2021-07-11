@@ -23,7 +23,7 @@
             android:gravity="center"
             android:fontFamily="@font/satisfyregular"
             android:textColor="@color/red_700"
-            android:text="ARE YOU SURE YOU WANT TO DELETE THIS"
+            android:text="@string/are_you_sure_you_want_to_delete_this"
             android:textSize="20sp" />
 
         <Button
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="OK"
+            android:text="@string/ok"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:textSize="30sp" />
 

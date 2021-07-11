@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.list_creater_app.Lists.ListFragment"
+        android:name="com.vishal.list_creater_app.Lists.ListFragment"
         android:label="ListFragment" >
         <action
             android:id="@+id/action_listFragment_to_itemFragment"
@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
-        android:name="com.example.list_creater_app.Items.ItemFragment"
+        android:name="com.vishal.list_creater_app.Items.ItemFragment"
         android:label="ItemFragment" >
         <argument
             android:name="id"
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/dashboard"
-        android:name="com.example.list_creater_app.DashBoard.dashboardFragment"
+        android:name="com.vishal.list_creater_app.DashBoard.dashboardFragment"
         android:label="dashboard" >
         <action
             android:id="@+id/action_dashboard_to_listFragment2"

@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">सूची निर्माता</string>
+
+    <string-array name="weightUnit">
+        <item>कोई नहीं</item>
+        <item>किलोग्राम</item>
+        <item>ग्राम</item>
+
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">नमस्ते खाली टुकड़ा</string>
+    <string name="enter_the_list_name">सूची का नाम दर्ज करें</string>
+    <string name="add">जोड़ें</string>
+    <string name="item_name">वस्तु का नाम</string>
+    <string name="quantity">मात्रा</string>
+    <string name="rate">मूल्यांकन करें</string>
+    <string name="if_unit_of_item_is_none">यदि मद की इकाई है--कोई नहीं</string>
+    <string name="amount_quantity_rate">राशि = मात्रा * दर</string>
+    <string name="otherwise">अन्यथा ,</string>
+    <string name="amount_rate">राशि = दर</string>
+    <string name="are_you_sure_you_want_to_delete_this">क्या आप वाकई इसे हटाना चाहते हैं</string>
+    <string name="ok">ठीक है</string>
+    <string name="items">आइटम</string>
+    <string name="_5">5</string>
+    <string name="amount">रकम</string>
+    <string name="share">शेयर</string>
+    <string name="people_name">लोगों का नाम</string>
+    <string name="items1">आइटम</string>
+    <string name="item_name2">वस्तु का नाम</string>
+    <string name="quantity2">मात्रा:</string>
+    <string name="rate2">मूल्यांकन करें :</string>
+    <string name="description">विवरण</string>
+    <string name="create_once_and_use_it_for_lifetime">एक बार बनाएं और जीवन भर उपयोग करें</string>
+    <string name="your_list">आपकी सूचियाँ</string>
+    <string name="update">अपडेट</string>
+    <string name="create">बनाना</string>
+    <string name="unit">यूनिट</string>
+    <string name="None">कोई नहीं</string>
+    <string name="create_list">सूची बनाएं</string>
+    <string name="view_list">सूची देखें</string>
+    <string name="your_list_is_empty_add_item">आपकी सूची खाली है आइटम जोड़ें</string>
+    <string name="you_do_not_have_any_list">आपके पास कोई सूची नहीं है</string>
+    <string name="total_Items">कुल सामान</string>
+    <string name="total_amount">कुल राशि</string>
+    <string name="select_the_Item_Property_you_want_to_Share">वह आइटम प्रॉपर्टी चुनें जिसे आप साझा करना चाहते हैं</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="choose_the_app_to_share_your_list">अपनी सूची साझा करने के लिए ऐप चुनें</string>
+    <string name="download_Our_App_from_Play_Store">प्ले स्टोर से हमारा ऐप डाउनलोड करें</string>
+</resources>

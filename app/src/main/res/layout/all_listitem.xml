@@ -62,12 +62,15 @@
                         android:paddingTop="5dp"
                         android:paddingRight="5dp"
                         android:paddingLeft="5dp"
-                        android:text="Item Name"
+                        android:text="@string/item_name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         />
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/quantity"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -78,12 +81,30 @@
                         android:paddingTop="0dp"
                         android:paddingRight="5dp"
                         android:paddingLeft="5dp"
-                        android:text="Quantity"
+                        android:text="@string/quantity"
 
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         />
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:fontFamily="@font/satisfyregular"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:paddingTop="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"/>
+
+</LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/rate"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -94,11 +115,27 @@
                         android:paddingTop="0dp"
                         android:paddingRight="5dp"
                         android:paddingLeft="5dp"
-                        android:text="Rate"
+                        android:text="@string/rate"
 
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         />
+                        <TextView
+                            android:id="@+id/rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
 
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:fontFamily="@font/satisfyregular"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:paddingTop="0dp"
+                            android:paddingRight="5dp"
+                            android:paddingLeft="5dp"
+
+
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

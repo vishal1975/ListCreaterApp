@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">List_creater_APP</string>
+    <string name="app_name">List Maker</string>
 
     <string-array name="weightUnit">
         <item>None</item>
@@ -9,4 +9,41 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_the_list_name">Enter the List name</string>
+    <string name="add">ADD</string>
+    <string name="item_name">Item Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="rate">Rate</string>
+    <string name="if_unit_of_item_is_none">If Unit Of Item is--None</string>
+    <string name="amount_quantity_rate">Amount=Quantity*Rate</string>
+    <string name="otherwise">Otherwise ,</string>
+    <string name="amount_rate">Amount= Rate</string>
+    <string name="are_you_sure_you_want_to_delete_this">ARE YOU SURE YOU WANT TO DELETE THIS</string>
+    <string name="ok">OK</string>
+    <string name="items">Items</string>
+    <string name="_5">5</string>
+    <string name="amount">Amount</string>
+    <string name="share">SHARE</string>
+    <string name="people_name">People Name</string>
+    <string name="items1">items</string>
+    <string name="item_name2">ITEM NAME</string>
+    <string name="quantity2">Quantity :</string>
+    <string name="rate2">RATE :</string>
+    <string name="description">description</string>
+    <string name="create_once_and_use_it_for_lifetime">Create Once And Use it For Lifetime</string>
+    <string name="your_list">Your Lists</string>
+    <string name="update">Update</string>
+    <string name="create">Create</string>
+    <string name="unit">unit</string>
+    <string name="None">None</string>
+    <string name="create_list">Create List</string>
+    <string name="view_list">View List</string>
+    <string name="your_list_is_empty_add_item">YOUR LIST IS EMPTY ADD ITEM</string>
+    <string name="you_do_not_have_any_list">YOU DO NOT HAVE ANY LIST</string>
+    <string name="total_Items">Total Items</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="select_the_Item_Property_you_want_to_Share">Select the Item Property you want to Share</string>
+    <string name="cancel">CANCEL</string>
+    <string name="choose_the_app_to_share_your_list">choose the app to share your list</string>
+    <string name="download_Our_App_from_Play_Store">Download Our App from Play Store</string>
 </resources>

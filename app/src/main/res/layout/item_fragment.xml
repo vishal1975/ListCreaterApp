@@ -45,7 +45,7 @@
                         android:layout_marginRight="3dp"
                         android:fontFamily="@font/satisfyregular"
                         android:paddingLeft="3dp"
-                        android:text="Items "
+                        android:text="@string/items"
                         android:textColor="@color/red_900"
                         android:textSize="20sp" />
 
@@ -54,12 +54,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/satisfyregular"
-                        android:text="5"
+                        android:text="@string/_5"
                         android:textColor="@color/red_900"
                         android:textSize="20sp" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/amount_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
@@ -72,7 +73,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginRight="3dp"
                         android:fontFamily="@font/satisfyregular"
-                        android:text="Amount"
+                        android:text="@string/amount"
                         android:textColor="@color/red_900"
                         android:textSize="20sp" />
 
@@ -81,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/satisfyregular"
-                        android:text="5"
+                        android:text="@string/_5"
                         android:textColor="@color/red_900"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -96,20 +97,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lyt"
             tools:layout_editor_absoluteX="159dp" />
 
-        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--            android:id="@+id/addItem"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="0.926"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:layout_constraintVertical_bias="0.954"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:clickable="true"-->
-        <!--            android:src="@drawable/plus"-->
-        <!--            tools:layout_editor_absoluteX="323dp"-->
-        <!--            tools:layout_editor_absoluteY="621dp" />-->
+
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -127,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="ADD"
+                android:text="@string/add"
                 app:icon="@drawable/plus"
                 app:iconSize="20dp"
                 tools:layout_editor_absoluteX="293dp"
@@ -140,22 +128,43 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="SHARE"
+                android:text="@string/share"
                 app:icon="@drawable/share"
                 app:iconSize="20dp"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="667dp" />
         </LinearLayout>
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/emptyitem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/item"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lyt"
-            app:srcCompat="@drawable/emptyitem" />
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:srcCompat="@drawable/emptylist" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="2"
+
+                android:text="@string/your_list_is_empty_add_item"
+                android:textColor="@color/black"
+
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
