@@ -71,7 +71,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/item_name2"
-                android:textSize="40sp"
+
+                android:textSize="30sp"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="20sp"
+                app:autoSizeMaxTextSize="40sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/satisfyregular"
                 android:gravity="center"
@@ -99,35 +103,45 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/satisfyregular"
                     android:text="@string/quantity2"
+                    android:padding="5dp"
+                    android:textSize="30sp"
                     android:textColor="@color/black"
-                    android:textSize="40sp"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="20sp"
+                    app:autoSizeMaxTextSize="40sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent" />
 
                 <TextView
                     android:id="@+id/quantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:fontFamily="@font/satisfyregular"
                     android:text="100"
                     android:textColor="@color/black"
-                    android:textSize="40sp"
+
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="20sp"
+                    app:autoSizeMaxTextSize="40sp"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/quantitytextView"
                     tools:layout_editor_absoluteY="0dp" />
                 <TextView
                     android:id="@+id/quantityUnit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:fontFamily="@font/satisfyregular"
                     android:text="KG"
                     android:textColor="@color/black"
-                    android:textSize="40sp"
+
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="20sp"
+                    app:autoSizeMaxTextSize="40sp"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/quantity"
                     tools:layout_editor_absoluteY="0dp" />
@@ -155,21 +169,27 @@
                     android:fontFamily="@font/satisfyregular"
                     android:text="@string/rate2"
                     android:textColor="@color/black"
-                    android:textSize="40sp"
+                    app:autoSizeTextType="uniform"
+                    android:textSize="30sp"
+                    app:autoSizeMinTextSize="20sp"
+                    app:autoSizeMaxTextSize="40sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent" />
 
                 <TextView
                     android:id="@+id/rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:fontFamily="@font/satisfyregular"
                     android:text="100"
                     android:textColor="@color/black"
-                    android:textSize="40sp"
+
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="20sp"
+                    app:autoSizeMaxTextSize="35sp"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/rate_textview"
                     tools:layout_editor_absoluteY="0dp" />
@@ -192,7 +212,10 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/satisfyregular"
                 android:textColor="@color/black"
-                android:textSize="25sp"/>
+                android:textSize="30sp"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="20sp"
+                app:autoSizeMaxTextSize="40sp"/>
         </LinearLayout>
     </LinearLayout>
 

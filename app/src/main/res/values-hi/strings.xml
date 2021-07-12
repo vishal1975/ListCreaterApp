@@ -46,4 +46,6 @@
     <string name="cancel">रद्द करें</string>
     <string name="choose_the_app_to_share_your_list">अपनी सूची साझा करने के लिए ऐप चुनें</string>
     <string name="download_Our_App_from_Play_Store">प्ले स्टोर से हमारा ऐप डाउनलोड करें</string>
+    <string name="Kg">किलोग्राम</string>
+    <string name="g">ग्राम</string>
 </resources>

@@ -8,6 +8,7 @@
 
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_the_list_name">Enter the List name</string>
     <string name="add">ADD</string>
@@ -46,4 +47,6 @@
     <string name="cancel">CANCEL</string>
     <string name="choose_the_app_to_share_your_list">choose the app to share your list</string>
     <string name="download_Our_App_from_Play_Store">Download Our App from Play Store</string>
+    <string name="Kg">kg</string>
+    <string name="g">g</string>
 </resources>

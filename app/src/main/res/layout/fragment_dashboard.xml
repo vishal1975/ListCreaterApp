@@ -18,7 +18,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="403dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
@@ -37,10 +37,10 @@
                     android:id="@+id/createlist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="5dp"
-                    app:cardBackgroundColor="@color/white"
-                    android:layout_marginTop="25dp"
                     app:layout_constraintBottom_toTopOf="@+id/viewlist"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -61,8 +61,9 @@
                             app:srcCompat="@drawable/createlist" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@string/create_list"
                             android:textColor="@color/black"
@@ -75,10 +76,10 @@
                     android:id="@+id/viewlist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="20dp"
                     android:layout_marginTop="25dp"
-                    app:cardElevation="5dp"
                     app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -99,9 +100,10 @@
                             app:srcCompat="@drawable/viewlist" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:layout_gravity="center"
                             android:text="@string/view_list"
                             android:textColor="@color/black"
                             android:textSize="25sp"
