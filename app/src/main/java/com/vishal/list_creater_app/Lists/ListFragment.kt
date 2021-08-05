@@ -16,6 +16,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
 import com.vishal.list_creater_app.Database.ItemList
 import com.vishal.list_creater_app.Database.ListDatabase
 import com.vishal.list_creater_app.R
@@ -107,8 +110,8 @@ class ListFragment : Fragment() {
 
 
         // observing end
-
-
+        // ads implementation
+        implement_Ads();
         setListRecyclerViewItemClickHandler()
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         (requireActivity() as AppCompatActivity).supportActionBar?.title=resources.getString(R.string.your_list)
@@ -244,6 +247,36 @@ class ListFragment : Fragment() {
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
+    fun implement_Ads(){
 
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+        binding.adView.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                // Code to be executed when an ad request fails.
+                super.onAdFailedToLoad(adError)
+                binding.adView.loadAd(adRequest)
+            }
+
+            override fun onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            override fun onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        }
+    }
 
 }

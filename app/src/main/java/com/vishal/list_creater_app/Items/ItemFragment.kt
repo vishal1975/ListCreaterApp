@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.*
 import com.vishal.list_creater_app.Database.Item
 import com.vishal.list_creater_app.Database.ListDatabase
 import com.vishal.list_creater_app.R
@@ -75,6 +76,8 @@ class ItemFragment : Fragment() {
         binding.amountLayout.setOnClickListener {
             showCustomDialog()
         }
+
+        implement_Ads();
         setClickHandlerForItemRecyclerView()
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         (requireActivity() as AppCompatActivity).supportActionBar?.title= "$name"
@@ -380,5 +383,35 @@ private fun showBottomSheetDialogToAddOrEditItemInList(id: Long, flag: Int = 0, 
         dialog.window!!.attributes = lp
     }
 
+fun implement_Ads(){
 
+
+    val adRequest = AdRequest.Builder().build()
+    binding.adView.loadAd(adRequest)
+    binding.adView.adListener = object: AdListener() {
+        override fun onAdLoaded() {
+            // Code to be executed when an ad finishes loading.
+        }
+
+        override fun onAdFailedToLoad(adError : LoadAdError) {
+            // Code to be executed when an ad request fails.
+            super.onAdFailedToLoad(adError)
+            binding.adView.loadAd(adRequest)
+        }
+
+        override fun onAdOpened() {
+            // Code to be executed when an ad opens an overlay that
+            // covers the screen.
+        }
+
+        override fun onAdClicked() {
+            // Code to be executed when the user clicks on an ad.
+        }
+
+        override fun onAdClosed() {
+            // Code to be executed when the user is about to return
+            // to the app after tapping on an ad.
+        }
+    }
+}
 }

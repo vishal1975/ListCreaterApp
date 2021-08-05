@@ -13,10 +13,11 @@ android {
         applicationId "com.vishal.list_creater_app"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 3
-        versionName "3.0"
+        versionCode 4
+        versionName "4.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -75,4 +76,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+  // library for ad-mob
+    implementation 'com.google.android.gms:play-services-ads:20.2.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
