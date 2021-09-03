@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class ItemList(
     @PrimaryKey(autoGenerate = true)
     val listId:Long=0L,
-    val listName:String=""
+    val listName:String="",
+    val type:Int=0 // 1 for recieved file 2 for sent file 0 for other file
 
 )

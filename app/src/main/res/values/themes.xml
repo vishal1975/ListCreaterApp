@@ -12,9 +12,18 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
     </style>
-    <style name="NoActionBar" parent="Theme.List_creater_APP">
+<!--    <style name="NoActionBar" parent="Theme.List_creater_APP">-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--    </style>-->
+    <style name="Theme.List_creater_APP.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.List_creater_APP.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.List_creater_APP.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -6,12 +6,14 @@ import android.content.DialogInterface
 import android.content.DialogInterface.OnMultiChoiceClickListener
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +24,9 @@ import com.vishal.list_creater_app.R
 import com.vishal.list_creater_app.databinding.ItemFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputLayout
+import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
 
 class ItemFragment : Fragment() {
 
@@ -71,7 +76,7 @@ class ItemFragment : Fragment() {
             showBottomSheetDialogToAddOrEditItemInList(id)
         }
         binding.share.setOnClickListener(){
-            viewModel._item.value?.let { it1 -> share(it1) }
+            viewModel._item.value?.let { it1 -> createFile(it1,name) }
         }
         binding.amountLayout.setOnClickListener {
             showCustomDialog()
@@ -87,6 +92,7 @@ class ItemFragment : Fragment() {
 
 
    // alert dialog to share a list
+    /*
    fun share(itemList: List<Item>){
        val items= arrayOf(resources.getString(R.string.item_name), resources.getString(R.string.quantity), resources.getString(R.string.rate), resources.getString(R.string.description), resources.getString(R.string.total_Items), resources.getString(R.string.total_amount))
        val checkedItems= booleanArrayOf(true, false, false, false, false, false)
@@ -138,7 +144,7 @@ class ItemFragment : Fragment() {
    }
 
 
-
+*/
 
 
     // setting the quantity and amount of list
@@ -414,4 +420,36 @@ fun implement_Ads(){
         }
     }
 }
+   private fun createFile(itemList: List<Item>, name:String){
+      viewModel.createJsonString(itemList,name,final_totalAmount,final_totalItems).observe(viewLifecycleOwner,{
+          val builder=StringBuilder(name)
+          builder.append(".json")
+          val filename=builder.toString()
+          val file: File = File(requireActivity().getExternalFilesDir(null), filename)
+          val fileOutputStream= FileOutputStream(file)
+          fileOutputStream.write(it.toByteArray())
+          fileOutputStream.close()
+         shareFile(file)
+
+      })
+    }
+    fun shareFile(file:File){
+        if (file.exists()) {
+            val uri: Uri = FileProvider.getUriForFile(requireContext(), "com.vishal.list_creater_app.fileprovider", file)
+
+            val shareIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_STREAM, uri)
+               // putExtra(Intent.EXTRA_TEXT,R.string.download_Our_App_from_Play_Store)
+                putExtra(Intent.EXTRA_TEXT,"To Open The List Download Our App  https://play.google.com/store/apps/details?id=com.vishal.list_creater_app")
+
+                type = "text/json"
+                //addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            startActivity(Intent.createChooser(shareIntent, "choose the app to share the file"))
+        }
+        else{
+            Toast.makeText(requireContext(), "File does not exit", Toast.LENGTH_SHORT).show()
+        }
+    }
 }

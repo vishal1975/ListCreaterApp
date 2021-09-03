@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -113,6 +114,7 @@ class ListFragment : Fragment() {
         // ads implementation
         implement_Ads();
         setListRecyclerViewItemClickHandler()
+
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         (requireActivity() as AppCompatActivity).supportActionBar?.title=resources.getString(R.string.your_list)
         (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.deep_purple_300)))
