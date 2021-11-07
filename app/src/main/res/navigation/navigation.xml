@@ -27,12 +27,20 @@
     <fragment
         android:id="@+id/dashboard"
         android:name="com.vishal.list_creater_app.DashBoard.dashboardFragment"
-        android:label="dashboard" >
+        android:label="Home" >
         <action
             android:id="@+id/action_dashboard_to_listFragment2"
             app:destination="@id/listFragment" />
         <action
             android:id="@+id/action_dashboard_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recievedFragement"
+        android:name="com.vishal.list_creater_app.RecievedList.RecievedFragement"
+        android:label="RecievedFragement" >
+        <action
+            android:id="@+id/action_recievedFragement_to_itemFragment"
             app:destination="@id/itemFragment" />
     </fragment>
 </navigation>

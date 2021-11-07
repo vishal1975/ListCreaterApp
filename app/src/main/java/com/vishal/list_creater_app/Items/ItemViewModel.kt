@@ -1,6 +1,7 @@
 package com.vishal.list_creater_app.Items
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,10 @@ import com.vishal.list_creater_app.Database.ListDatabaseDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
 import java.lang.Exception
 
 class ItemViewModel(val datasource:ListDatabaseDao,val id: Long) : ViewModel() {
@@ -69,6 +74,39 @@ class ItemViewModel(val datasource:ListDatabaseDao,val id: Long) : ViewModel() {
         }
     }
 
+     fun createJsonString(itemList: List<Item>, name:String,totalamount:Double,totalitem:Int):LiveData<String>{
+         val fileContent=MutableLiveData<String>()
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                val builder=StringBuilder(name)
+                builder.append(".json")
+                val filename=builder.toString()
+                val jsonObject= JSONObject()
+                jsonObject.put("listname",name)
+                jsonObject.put("totalamount",totalamount)
+                jsonObject.put("totalitem",totalitem)
+                val jasonarray= JSONArray()
+                for(item in itemList){
+                    val temp= JSONObject()
+                    temp.put("itemName",item.itemName)
+                    temp.put("quantity",item.quantity)
+                    temp.put("quantityUnit",item.quantityUnit)
+                    temp.put("amount",item.amount)
+                    temp.put("itemDescription",item.itemDescription)
+                    jasonarray.put(temp)
+                }
+                jsonObject.put("property",jasonarray)
+                 fileContent.postValue(jsonObject.toString())
 
+
+
+            }
+        }
+         return fileContent
+
+    }
+    fun createJsonStringUtil(fileContent:String){
+
+    }
 
 }

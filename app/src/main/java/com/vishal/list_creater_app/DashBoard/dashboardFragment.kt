@@ -36,7 +36,7 @@ lateinit var viewModel:DashBoardViewModel
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         //(requireActivity() as AppCompatActivity).supportActionBar?.title="Dashboard"
-        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+       // (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         binding= FragmentDashboardBinding.inflate(inflater,container,false)
 
         val application = requireNotNull(this.activity).application

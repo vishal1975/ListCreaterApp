@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-@Database(entities = [ItemList::class,Item::class],version = 1,exportSchema = false)
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+
+@Database(entities = [ItemList::class,Item::class],version = 2,exportSchema = false)
 abstract class ListDatabase:RoomDatabase() {
 
 
@@ -12,6 +15,12 @@ abstract class ListDatabase:RoomDatabase() {
 
 
     companion object {
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                        "ALTER TABLE ItemList ADD COLUMN type INTEGER NOT NULL DEFAULT(0)")
+            }
+        }
 
         @Volatile
         private var INSTANCE: ListDatabase? = null
@@ -33,6 +42,7 @@ abstract class ListDatabase:RoomDatabase() {
                     )
 
                         .fallbackToDestructiveMigration()
+                            .addMigrations(MIGRATION_1_2)
                         .build()
 
                     INSTANCE = instance
