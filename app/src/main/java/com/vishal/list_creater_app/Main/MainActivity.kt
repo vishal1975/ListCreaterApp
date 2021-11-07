@@ -79,8 +79,8 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
-       // return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-        return NavigationUI.navigateUp(navController,drawer)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        //return NavigationUI.navigateUp(navController,drawer)
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
